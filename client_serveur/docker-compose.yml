@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+    serveur:
+        build:
+            context: .
+            args:
+                PORT: "26001"
+                FILE: "./serveur/"
+        container_name: Serveur
+        ports:
+            - '26001:26001'
+    client:
+        build:
+            context: .
+            args:
+                PORT: "26002"
+                FILE: "./client/"
+        container_name: Client
+        ports:
+            - '26002:26002'
