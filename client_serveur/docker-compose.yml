@@ -10,6 +10,7 @@ services:
         container_name: Serveur
         ports:
             - '26001:26001'
+        network_mode: host
     client:
         build:
             context: .
@@ -19,3 +20,4 @@ services:
         container_name: Client
         ports:
             - '26002:26002'
+        network_mode: host
