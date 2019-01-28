@@ -2,7 +2,7 @@
 import socket
 
 #Declaration et Initialisation
-ip = 'localhost'
+ip = ''
 port = 26001
 message_recu = bytes
 nb_tentative = 0

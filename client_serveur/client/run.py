@@ -2,7 +2,7 @@
 import socket
 
 #Declaration
-ip = 'localhost'
+ip = '0.0.0.0'
 port = 26001
 
 #Declaration du socket
