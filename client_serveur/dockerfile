@@ -13,6 +13,6 @@ EXPOSE $PORT
 
 ADD $FILE /
 
-RUN chmod +x /run.sh
+RUN chmod +x /run.py
 
-CMD ["/run.sh"]
+CMD ["python3", "run.py"]
