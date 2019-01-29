@@ -6,7 +6,8 @@ services:
             context: .
             args:
                 PORT: "26001"
-                FILE: "./serveur/"
+                FILE: "client_serveur.py"
+                MODE: "serveur"
         container_name: Serveur
         ports:
             - '26001:26001'
@@ -16,7 +17,8 @@ services:
             context: .
             args:
                 PORT: "26002"
-                FILE: "./client/"
+                FILE: "client_serveur.py"
+                MODE: "client"
         container_name: Client
         ports:
             - '26002:26002'

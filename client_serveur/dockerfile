@@ -1,16 +1,26 @@
+#Image base
 FROM alpine:edge
 
 LABEL maintainer "Zamiel"
 
+#Mise à jour et installation de python3
 RUN apk update && \
 apk upgrade && \
 apk add python3
 
+#Declaration des arguments du docker-compose
 ARG PORT
 ARG FILE
+ARG MODE
 
+ENV FILE ${FILE}
+ENV MODE ${MODE}
+
+#Ouverture du port
 EXPOSE $PORT
 
+#Ajout du script
 ADD $FILE /
 
-CMD ["python3", "run.py"]
+#Lancement du script
+CMD ["sh", "-c", "python3 ${FILE} ${MODE}"]
