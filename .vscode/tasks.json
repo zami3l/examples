@@ -8,7 +8,8 @@
             "type": "shell",
             "command": "python",
             "args": [
-                "${workspaceFolder}/client_serveur/client/run.py"
+                "${workspaceFolder}/client_serveur/client_serveur.py",
+                "client"
             ],
             "problemMatcher": []
         },
@@ -17,7 +18,8 @@
             "type": "shell",
             "command": "python",
             "args": [
-                "${workspaceFolder}/client_serveur/serveur/run.py"
+                "${workspaceFolder}/client_serveur/client_serveur.py",
+                "serveur"
             ],
             "problemMatcher": []
         }
