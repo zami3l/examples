@@ -13,7 +13,7 @@ def checksum():
 #Si client
 if (sys.argv[1] == "client"):
     #Declaration
-    ip = '0.0.0.0'
+    ip = '127.0.0.1'
     port = 26001
 
     #Declaration du socket
@@ -46,7 +46,7 @@ if (sys.argv[1] == "client"):
 #Si Serveur
 elif (sys.argv[1] == "serveur"):
     #Declaration et Initialisation
-    ip = ''
+    ip = '127.0.0.1'
     port = 26001
 
     #Declaration du socket

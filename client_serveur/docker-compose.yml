@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 
 services:
     serveur:
@@ -12,6 +12,7 @@ services:
         ports:
             - '26001:26001'
         network_mode: host
+
     client:
         build:
             context: .
