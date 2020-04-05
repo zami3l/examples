@@ -12,31 +12,30 @@ def existPackage(namePackage):
 
             sys.exit()
 
-def createFolder(path, nameFolder):
-    
-    folderReception = "{}/{}".format(path, nameFolder)
+def createFolder(folderReception):
 
     if os.path.isdir(folderReception):
 
-        os.rmdir(folderReception)
+        os.rename(folderReception, folderReception + "_old")
         os.mkdir(folderReception)
 
     else:
 
         os.mkdir(folderReception)
 
-def heicToJpg(pathFolder, nameFolderReception):
+def heicToJpg(pathFolder, pathFolderReception):
 
-    print("\nCréation du dossier de réception [{}] terminée.\n".format(nameFolderReception))
-    createFolder(pathFolder, nameFolderReception)
+    print("\nCréation du dossier de réception [{}] terminée.\n".format(pathFolderReception))
+    createFolder(pathFolderReception)
 
     print("Début de conversion HEIC vers JPG :\n")
+
     for files in os.listdir(pathFolder):
 
-        if fnmatch.fnmatch(files, '*.heic'):
+        if fnmatch.fnmatch(files, '*.HEIC'):
 
-            cmd = "heif-convert -q 100 {} {}.jpg".format(files, files[-7:])
-            os.system(cmd)
+            print("Conversion du fichier [{}] -> [{}.JPG]".format(files, files[-8:-5]))
+            os.system("heif-convert -q 100 \"{}/{}\" \"{}/{}.jpg\"".format(pathFolder, files, pathFolderReception, files[-8:-5]))
     
     print("\nConversion terminée.\n")
 
@@ -48,9 +47,9 @@ if __name__ == "__main__":
     if len(sys.argv) == 3:
 
         #Lancement de la conversion HEIC -> JPG
-        heicToJpg(sys.argv[1], "result")       
+        heicToJpg(sys.argv[1], sys.argv[2])       
 
     else:
 
-        print('Utilisation : py convert.py [EMPLACEMENT DU DOSSIER] [NOM DU DOSSIER DE RECEPTION]')
+        print('Utilisation : py convert.py [Path du dossier HEIC] [Path dossier de sortie]')
         sys.exit()
