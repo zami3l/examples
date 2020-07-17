@@ -1,0 +1,16 @@
+FROM archlinux
+
+ARG PATH_INSTALL='/downloads'
+ARG PATH_SOFTWARE='/opt'
+
+RUN pacman -Syy --noconfirm git wget man vim gzip sudo base-devel
+
+# CREATE user build for using packages AUR
+RUN useradd -m build && \
+    echo 'build ALL=NOPASSWD: ALL' >> /etc/sudoers
+
+# ADD yay
+RUN sudo -u build git clone --depth=1 https://aur.archlinux.org/yay.git ${PATH_BUILD}/yay && \
+    cd ${PATH_BUILD}/yay && \
+    sudo -u build makepkg -si --noconfirm && \
+    yay -Syy
