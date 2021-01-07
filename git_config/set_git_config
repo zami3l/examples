@@ -1,0 +1,73 @@
+#!/bin/bash
+
+######################################
+# set_git_config
+# Description : Applique la configuration git
+# Auteur: Zami3l
+######################################
+
+# Function to check the number of arguments
+checkArg() {
+
+    local nbArg=${1}
+
+    if [[ nbArg -lt 2 || nbArg -gt 3 ]]; then
+       
+        echo "For using the script : \n"; 
+        echo "./set_git_config [USER] [EMAIL] [FINGERPRINT]";
+        echo "Fingerprint is optionnal if not use commit sign."; 
+        
+        return 1
+
+    else 
+
+        return 0
+
+    fi
+
+}
+
+# Function for adding global git configurations
+addConf() {
+
+    local user="${1}"
+    local email="${2}"
+    local fingerprint="${3}"
+    
+    git config --global user.name $user
+    git config --global user.email $email
+   
+    if [ -n "$fingerprint" ]; then
+
+        git config --global commit.gpgsign true; 
+        git config --global user.signingkey $fingerprint;
+        git config --global alias.logs "log --show-signature";
+        git config --global alias.cs "commit -S";
+
+    else
+
+        git config --global commit.gpgsign false;
+        git config --global --unset user.signingkey;
+        git config --global --unset alias.logs;
+        git config --global --unset alias.cs; 
+
+
+    fi
+
+}
+
+# Main
+main () {
+
+    checkArg ${#}
+
+    if [ $? -eq 0 ]; then
+
+        addConf ${1} ${2} ${3}
+
+    fi
+   
+}
+
+# Exec
+main ${@}
